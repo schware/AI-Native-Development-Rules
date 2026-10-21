@@ -377,3 +377,9 @@ AI가 답 하나를 완성된 형태로 제시
   - 00 흐름에서 `assumptions`와 `evidence`의 순서 확인
 - 그룹 3 (팀 결정권): 역할 사이의 결정 충돌 해결, 위험 등급 하향 승인, Orchestrator 권한, 최소 Gate
 - 그룹 4 (실제 프로젝트에 적용한 뒤 결정): Context Budget, 요약 손실 평가, Context Manifest 자동 생성, MCP 보안 경계, 관계 스키마 세부, CI 실패 수준, Multi-Agent 전환 시점, Graph DB 도입 시점, 질문 피로 측정, Evidence 신뢰 등급, 이중 View 유지 비용
+- 00.common 을 idea_space, problem_space, assumptions, evidence, opportunity, vision, decision에 공통으로 적용되는 표현, 식별, 연결, 보고 및 검토의 기반 규칙을 정의한다.
+  - 00.common
+    → 전체 영역을 연결하는 공통 계약으로 정의하고 정리 한다.
+  - 각 영역
+    → 자신만의 의미, 상태, 필드와 생명주기
+  - 00.common 에는 Review 와 Report 를 관리 하도록 한다. 이것에 대해서 넣어야 할 공간이 명확하지 않아서 생긴 고민
