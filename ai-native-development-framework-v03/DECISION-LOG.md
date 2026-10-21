@@ -70,7 +70,7 @@ AI가 답 하나를 완성된 형태로 제시
 | DEC-017 | high 결정은 사람이 확인해야 진행 | AI 추천 수정 | claude_code (draft) + Sun&Moon(생각) | 미반영 |
 | DEC-018 | 규칙 문장은 영어가 원본 | 사람 제안 | Sun&Moon (발언 요약) | 미반영 |
 | DEC-019 | 확인되지 않은 draft는 미결정으로 셈 | AI 추천 수정 | claude_code (draft) + Sun&Moon(생각) | 미반영 |
-| DEC-020 | 위험 등급은 영어로만 표시 | 사람 제안 | claude_code (draft) | 미반영 |
+| DEC-020 | 위험 등급은 영어로만 표시 | 사람 제안 |  Sun&Moon (결정) | 반영 |
 | DEC-021 | 기간 체계: Weekly / Monthly / Quarter / Half / Year | 사람 제안 | Sun&Moon(생각) | 미반영 |
 | DEC-022 | GitHub 공개 저장소 `AI-Native-Development-Rules` | 사람 제안 | Sun&Moon (발언 요약) | — |
 
@@ -260,7 +260,9 @@ AI가 답 하나를 완성된 형태로 제시
 
 - **결정**: `risk_level`은 `low`, `medium`, `high`로만 표시한다. 한국어 이름(경량, 표준, 고위험)은 쓰지 않는다.
 - **채택**: 사람 제안
-- **이유**: 규칙 문장을 영어 원본으로 정한 DEC-018과 표기를 맞춘다. — *claude_code (draft)*
+- **이유**:
+- 규칙 문장을 영어 원본으로 정한 DEC-018과 표기를 맞춘다. — *claude_code (draft)*
+- 영어로 한다. 결정함 — *Sun&Moon (결정)*
 - **replaces**: DEC-008의 한국어 병기 (`low`(경량) 등)
 
 ### DEC-021 기간 체계
