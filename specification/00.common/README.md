@@ -357,16 +357,68 @@ Markdown
 project_id: EXAMPLE001
 project_name: "Example Project"
 default_language: ko
+
 common_spec:
+  repository: "<repository-url>"
   path: "specification/00.common/README.md"
   git_ref: "<tag-or-commit>"
+
+area_specs:
+  decision:
+    path: "specification/07.decision/README.md"
+    git_ref: "<tag-or-commit>"
+
 repository:
   base_branch: main
+
+records:
+  decision: "records/07.decision"
+
+identifiers:
+  person: "<person-id-rule>"
+  issue_patterns:
+    - "<issue-id-regex>"
+
+roles:
+  PL:
+    - "<person-id>"
+
+reports:
+  path: "reports"
+  types: []
 ```
+
+```text
+project_id, project_name, default_language
+→ 프로젝트의 식별자, 표시 이름 및 기본 작성 언어
+
+common_spec
+→ 프로젝트가 따르는 Common의 위치와 Git 참조(§11.4, §11.5). 같은 저장소의 명세를 따르면 repository를 생략할 수 있다
+
+area_specs
+→ 프로젝트가 따르는 영역 명세의 위치와 Git 참조. 키는 영역 이름이다. 사용하는 영역만 적는다
+
+repository.base_branch
+→ 공식 기록의 반영 기준 Branch(§6.1)
+
+records
+→ 영역별 공식 기록의 저장 경로(§6.8). 키는 area_specs와 같은 영역 이름을 쓴다
+
+identifiers
+→ 사람 식별자 규칙과 이슈 식별자 형식
+
+roles
+→ 역할과 그 역할을 맡은 사람의 대응. 한 사람이 여러 역할을 맡을 수 있다(§3.4)
+
+reports
+→ 보존하는 보고서의 저장 경로와 보고 유형(§10.1). 보고서를 보존하지 않으면 생략한다
+```
+
+공식 기록의 저장 위치는 `records`이고, 반영 조건은 `repository.base_branch`에 통합되는 것이다(§6.1).
 
 `project_id`와 `project_name`은 개별 기록에 반복하지 않는다.
 
-프로젝트는 사람 식별자와 이슈 식별자의 형식을 프로젝트 설정에서 정의한다. 여러 이슈 관리 시스템을 사용하는 경우에는 식별자만으로 시스템을 구분할 수 있는 규칙을 함께 정의한다.
+여러 이슈 관리 시스템을 사용하는 경우에는 `issue_patterns`만으로 시스템을 구분할 수 있도록 형식을 정의한다.
 
 ### 6.5 공통 YAML 필드
 
@@ -471,7 +523,7 @@ reports/
 
 공식 기록은 `records/` 아래에서 영역별로 구분한다.
 
-구체적인 하위 경로와 영역의 매핑은 프로젝트 설정에서 명시한다.
+구체적인 하위 경로와 영역의 매핑은 프로젝트 설정(§6.4의 `records`)에서 명시한다.
 
 텍스트 파일은 UTF-8과 LF를 사용한다.
 
@@ -752,7 +804,7 @@ AI Agent는 위험 등급을 제안하거나 재평가할 수 있지만 위험�
 
 보고서는 사람이 요청할 때 생성한다. 정기 자동 생성은 현재 도입하지 않는다.
 
-`report_type`과 대상 기간의 표현은 프로젝트 보고 규칙에서 정의한다. 보고 유형은 자동 생성 주기를 의미하지 않는다.
+`report_type`과 대상 기간의 표현은 프로젝트 설정(§6.4의 `reports`)에서 정의한다. 보고 유형은 자동 생성 주기를 의미하지 않는다.
 
 사람 또는 AI Agent가 보고서를 생성할 수 있다. 사람이 보존을 요청한 보고서는 `reports/`에 저장할 수 있다.
 
@@ -1022,7 +1074,6 @@ No Issue
 
 ## 13. 검토 중인 항목
 
-- 프로젝트 설정의 필드 구조: §6.1(공식 기록의 저장 위치와 반영 조건), §6.4(사람 식별자와 이슈 식별자 형식), §6.8(`records/` 하위 경로와 영역의 매핑), §10.1(`report_type`과 대상 기간)은 프로젝트 설정에서 정한다고 했지만, §6.4의 `project.yaml` 예시에는 이 항목들을 적을 자리가 아직 없다.
 - 공통 규칙 후보의 검증: §0에 적은 대로, 다른 영역 명세를 작성하면서 각 규칙이 §2.3의 승격 기준을 충족하는지 확인한다.
 
 이 밖에 실제 프로젝트 적용과 기준 버전 조건 확인이 남아 있다.
