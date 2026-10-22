@@ -1,0 +1,29 @@
+# <...>로 표시된 빈칸을 채운다. 필드의 의미는 00.common §6.4를 따른다.
+
+project_id: "<PROJECT_ID>"           # 영문 대문자 3~8자 + 숫자 3자리 (00.common §7.1)
+project_name: "<PROJECT_NAME>"
+default_language: ko
+
+common_spec:
+  repository: "https://github.com/schware/AI-Native-Development-Rules"
+  path: "specification/00.common/README.md"
+  git_ref: "v0.1.0"
+
+area_specs:
+  decision:
+    path: "specification/07.decision/README.md"
+    git_ref: "v0.1.0"
+
+repository:
+  base_branch: main
+
+records:
+  decision: "records/07.decision"
+
+identifiers:
+  person: "github-username"
+  issue_patterns: []                 # 이슈 관리 시스템을 정한 뒤 추가. 예: "^PROJ-[0-9]+$"
+
+roles:
+  PL:
+    - "<PERSON_ID>"
