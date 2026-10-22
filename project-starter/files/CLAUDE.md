@@ -1,6 +1,10 @@
 # 이 프로젝트의 AI 작업 규칙
 
-이 프로젝트는 AI Native Development Rules에서 시작했다. 이 프로젝트의 규칙은 `.framework/specification/`에 있으며, `project.yaml`의 `git_ref` 버전에서 복사해 와서 프로젝트 안에서 발전시킨다(00.common §11.5).
+이 프로젝트는 AI Native Development Rules를 따른다.
+
+- 공통 규칙은 `.framework/specification/`에 있다. `.framework/`는 Rules 저장소를 가리키는 submodule이며, `project.yaml`의 `git_ref` 버전을 가리킨다(00.common §11.5).
+- 이 프로젝트에만 적용하는 규칙은 `current-state.md`에 있다.
+- `.framework/`가 비어 있으면 작업을 시작하지 말고, 사람에게 `git submodule update --init` 실행을 요청한다.
 
 ## 작업 전에 읽을 것 (00.common §12.2)
 
@@ -13,7 +17,8 @@
 ## 반드시 지킬 것
 
 - 명세의 "검토 중인 항목"은 따르지 않는다.
-- `.framework/`의 규칙은 사람의 결정 없이 고치지 않는다. 고칠 필요가 있으면 결정 후보(`proposed`)를 작성하고 결정을 요청한다.
+- `.framework/` 안의 파일은 고치지 않는다. 공통 규칙을 바꿀 필요가 있으면 그 내용과 이유를 사람에게 보고한다. 반영은 사람이 Rules 저장소에 요청한다.
+- 이 프로젝트에만 적용할 규칙이 필요하면 결정 후보(`proposed`)를 작성하고 결정을 요청한다. 결정되면 `current-state.md`에 결정 ID와 함께 적는다.
 - 결정의 `status`를 `decided` 또는 `rejected`로 바꾸지 않는다. 결정은 사람만 한다.
 - `decided_by`와 `confirmed_by`에 AI를 적지 않는다.
 - 내가 쓴 내용은 `drafted_by`를 `ai_agent` 또는 `mixed`로 적는다.
