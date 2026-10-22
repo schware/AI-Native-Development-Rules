@@ -1,7 +1,6 @@
 # 이 프로젝트의 AI 작업 규칙
 
-이 프로젝트는 AI Native Development Rules를 따른다. 따르는 버전은 `project.yaml`에 있다.
-명세의 읽기 전용 사본은 `.framework/specification/`에 있으며, 직접 고치지 않는다.
+이 프로젝트는 AI Native Development Rules에서 시작했다. 이 프로젝트의 규칙은 `.framework/specification/`에 있으며, `project.yaml`의 `git_ref` 버전에서 복사해 와서 프로젝트 안에서 발전시킨다(00.common §11.5).
 
 ## 작업 전에 읽을 것 (00.common §12.2)
 
@@ -14,6 +13,7 @@
 ## 반드시 지킬 것
 
 - 명세의 "검토 중인 항목"은 따르지 않는다.
+- `.framework/`의 규칙은 사람의 결정 없이 고치지 않는다. 고칠 필요가 있으면 결정 후보(`proposed`)를 작성하고 결정을 요청한다.
 - 결정의 `status`를 `decided` 또는 `rejected`로 바꾸지 않는다. 결정은 사람만 한다.
 - `decided_by`와 `confirmed_by`에 AI를 적지 않는다.
 - 내가 쓴 내용은 `drafted_by`를 `ai_agent` 또는 `mixed`로 적는다.

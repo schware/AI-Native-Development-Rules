@@ -4,7 +4,16 @@
 
 - `files/` 안의 내용을 새 프로젝트 저장소의 루트에 그대로 복사한다.
 - 이 문서(`START.md`)는 복사하지 않는다.
-- 템플릿은 명세와 같은 Git Tag로 버전을 관리한다. 프로젝트는 시작할 때 사용한 Tag를 `project.yaml`의 `git_ref`에 적는다.
+- 템플릿은 명세와 같은 Git Tag로 버전을 관리한다. 프로젝트는 시작할 때 사용한 Tag를 `project.yaml`의 `git_ref`에 기준 버전으로 적는다.
+- 복사한 명세는 프로젝트의 규칙이 되며, 프로젝트 안에서 발전시킨다(00.common §11.5).
+
+```text
+기준 저장소 v0.1 ──복사──→ 프로젝트 A (v0.1 기준, A의 규칙으로 발전)
+               └──복사──→ 프로젝트 B (v0.1 기준, B의 규칙으로 발전)
+
+기준 저장소 v0.2 ──확인 후 적용──→ 프로젝트 A (v0.2 기준)
+               └──적용하지 않음──→ 프로젝트 B (v0.1 기준 유지)
+```
 
 ## files/ 구성
 
@@ -35,25 +44,25 @@
 ### 1. 사용할 버전의 템플릿과 명세 가져오기
 
 ```powershell
-git clone --depth 1 --branch v0.1.0 https://github.com/schware/AI-Native-Development-Rules.git "$env:TEMP\anr-v0.1.0"
+git clone --depth 1 --branch v0.2.0 https://github.com/schware/AI-Native-Development-Rules.git "$env:TEMP\anr-v0.2.0"
 ```
 
 ### 2. 템플릿 파일 복사
 
 ```powershell
-Copy-Item -Recurse -Force "$env:TEMP\anr-v0.1.0\project-starter\files\*" .
+Copy-Item -Recurse -Force "$env:TEMP\anr-v0.2.0\project-starter\files\*" .
 ```
 
-### 3. 명세의 읽기 전용 사본 만들기
+### 3. 프로젝트의 규칙 사본 만들기
 
-AI Agent는 이 사본을 읽는다(`CLAUDE.md` 참고). 사본은 직접 고치지 않고, 명세 버전을 올릴 때만 다시 복사한다(00.common §11.5).
+이 사본이 프로젝트의 규칙이 되며, AI Agent도 이 사본을 읽는다(`CLAUDE.md` 참고). 고치는 방법은 아래 "프로젝트에서 규칙을 고칠 때"를 따른다.
 
 ```powershell
 New-Item -ItemType Directory -Force .framework
 ```
 
 ```powershell
-Copy-Item -Recurse -Force "$env:TEMP\anr-v0.1.0\specification" .framework\
+Copy-Item -Recurse -Force "$env:TEMP\anr-v0.2.0\specification" .framework\
 ```
 
 ### 4. 빈칸 채우기
@@ -67,15 +76,40 @@ git add -A
 ```
 
 ```powershell
-git commit -m "Start project from AI Native Development Rules v0.1.0"
+git commit -m "Start project from AI Native Development Rules v0.2.0"
 ```
 
 ### 6. 첫 결정 기록
 
 `templates/decision.md`를 복사해 `records/07.decision/<PROJECT_ID>-D001.md`를 만들고 첫 결정을 기록한다. 결정이 `decided`가 되어 지금 유효한 규칙이 생기면 `current-state.md`에도 같은 Pull Request에서 추가한다.
 
-## 명세 버전을 올릴 때
+## 프로젝트에서 규칙을 고칠 때
 
-1. 새 Tag로 1단계와 3단계를 다시 실행해 `.framework/`를 바꾼다.
-2. `project.yaml`의 `git_ref`를 새 Tag로 바꾼다.
-3. 바뀐 규칙이 기존 기록과 `current-state.md`에 영향을 주는지 확인한다(00.common §11.6).
+1. 무엇을 왜 바꾸는지 결정 기록(`records/07.decision/`)으로 남긴다. AI Agent는 결정 후보까지만 작성하고, 결정은 사람이 한다.
+2. 결정이 `decided`가 되면 `.framework/specification/`의 해당 규칙을 고친다.
+3. 규칙을 고치는 커밋에 그 결정 ID를 `Record-Refs`로 적는다.
+
+이 기록이 있어야 새 기준 버전이 나왔을 때 프로젝트에서 바꾼 규칙을 찾을 수 있고, 기준 저장소에 반영할 때도 근거가 된다.
+
+## 새 기준 버전이 나왔을 때
+
+1. 기준 저장소에서 두 버전의 차이를 확인한다. 예: `https://github.com/schware/AI-Native-Development-Rules/compare/v0.2.0...v0.3.0`
+2. 적용할지 사람이 결정하고, 결정 기록으로 남긴다. 적용하지 않으면 여기서 끝난다.
+3. 적용한다면 새 버전을 임시 폴더로 가져온다.
+
+   ```powershell
+   git clone --depth 1 --branch v0.3.0 https://github.com/schware/AI-Native-Development-Rules.git "$env:TEMP\anr-v0.3.0"
+   ```
+
+4. 프로젝트의 사본과 새 버전을 비교한다. **새 버전으로 그대로 덮어쓰면 프로젝트에서 고친 규칙이 사라진다.**
+
+   ```powershell
+   git diff --no-index .framework\specification "$env:TEMP\anr-v0.3.0\specification"
+   ```
+
+5. 프로젝트에서 고친 규칙 중 남길 것을 정하고, 새 버전의 변경을 사본에 반영한다.
+6. `project.yaml`의 `git_ref`를 새 버전으로 바꾸고, 바뀐 규칙이 기존 기록과 `current-state.md`에 영향을 주는지 확인한다.
+
+## 프로젝트의 개선을 기준 저장소에 반영할 때
+
+프로젝트에서 발전시킨 규칙을 다른 프로젝트에서도 쓰고 싶으면, 기준 저장소(AI-Native-Development-Rules)에서 Claude Code에 반영을 요청한다. 그 규칙을 고친 프로젝트의 결정 기록을 근거로 함께 알려 준다. 반영한 뒤에는 새 버전 Tag를 만든다.

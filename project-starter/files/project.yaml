@@ -4,15 +4,15 @@ project_id: "<PROJECT_ID>"           # 영문 대문자 3~8자 + 숫자 3자리 
 project_name: "<PROJECT_NAME>"
 default_language: ko
 
-common_spec:
+common_spec:                         # 복사해 온 기준 저장소와 기준 버전 (00.common §11.5)
   repository: "https://github.com/schware/AI-Native-Development-Rules"
   path: "specification/00.common/README.md"
-  git_ref: "v0.1.0"
+  git_ref: "v0.2.0"
 
 area_specs:
   decision:
     path: "specification/07.decision/README.md"
-    git_ref: "v0.1.0"
+    git_ref: "v0.2.0"
 
 repository:
   base_branch: main
