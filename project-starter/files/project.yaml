@@ -22,7 +22,8 @@ records:
 
 identifiers:
   person: "github-username"
-  issue_patterns: []                 # 이슈 관리 시스템을 정한 뒤 추가. 예: "^PROJ-[0-9]+$"
+  issue_patterns:                    # GitHub Issue: <owner>/<repo>#<번호>. 예: schware/aidev-SOPS001#12
+    - "^[A-Za-z0-9-]+/[A-Za-z0-9._-]+#[0-9]+$"
 
 roles:
   PL:

@@ -51,7 +51,7 @@ AI가 답 하나를 완성된 형태로 제시
 
 | ID | 결정 | 채택 방식 | 이유 작성자 | v03 |
 |---|---|---|---|---|
-| DEC-001 | 작업 기간 관리 도구는 Jira | 사람 제안 | claude_code (draft) + Sun&Moon(생각) | 미반영 |
+| DEC-001 | 작업 기간 관리 도구는 Jira<br>*DEC-023이 대체* | 사람 제안 | claude_code (draft) + Sun&Moon(생각) | 미반영 |
 | DEC-002 | 대상은 3~5인 팀 | 사람 제안 | Sun&Moon (발언 요약) | 부분 |
 | DEC-003 | 기준 문서는 v03 | AI 추천 그대로 | claude_code (draft) + Sun&Moon(생각) | — |
 | DEC-004 | 본문은 도구 중립, 도구별 내용은 부록 | AI 추천 그대로 | Sun&Moon (발언 요약) | 반영됨 |
@@ -64,7 +64,7 @@ AI가 답 하나를 완성된 형태로 제시
 | DEC-011 | 기간 단위 운영 (시작할 때 계획, 마칠 때 다시 보기)<br>*기간 체계는 DEC-021* | 사람 제안 | claude_code (draft) + Sun&Moon(생각) | 미반영 |
 | DEC-012 | 결정 기록 요구사항 R1~R6<br>*R2와 R4는 DEC-017, DEC-019가 보완* | AI 추천 수정 | Sun&Moon (발언 요약) | 부분 |
 | DEC-013 | 저장소에 기록된 것만 결정으로 인정 | AI 추천 그대로 | Sun&Moon (발언 요약) | 미반영 |
-| DEC-014 | 원본 경계: 작업 상태는 Jira, 결정과 설계는 저장소 | AI 추천 그대로 | claude_code (draft) + Sun&Moon(생각) | 미반영 |
+| DEC-014 | 원본 경계: 작업 상태는 Jira, 결정과 설계는 저장소<br>*Jira 부분은 DEC-023이 대체* | AI 추천 그대로 | claude_code (draft) + Sun&Moon(생각) | 미반영 |
 | DEC-015 | 설계 변경 시 결정 기록 필수 | 사람 제안 | Sun&Moon (발언 요약) | 미반영 |
 | DEC-016 | Verification 범위: 자동 검사와 체크리스트 | AI 추천 그대로 | claude_code (draft) + Sun&Moon(질문과 생각) | 미반영 |
 | DEC-017 | high 결정은 사람이 확인해야 진행 | AI 추천 수정 | claude_code (draft) + Sun&Moon(생각) | 미반영 |
@@ -73,6 +73,8 @@ AI가 답 하나를 완성된 형태로 제시
 | DEC-020 | 위험 등급은 영어로만 표시 | 사람 제안 |  Sun&Moon (결정) | 반영 |
 | DEC-021 | 기간 체계: Weekly / Monthly / Quarter / Half / Year | 사람 제안 | Sun&Moon(생각) | 미반영 |
 | DEC-022 | GitHub 공개 저장소 `AI-Native-Development-Rules` | 사람 제안 | Sun&Moon (발언 요약) | — |
+| DEC-023 | 이슈 관리 시스템은 GitHub Issues (Jira 대신) | 사람 제안 | Sun&Moon(생각) | — |
+| DEC-024 | 이슈 ID는 `schware/aidev-SOPS001#12` 형식 | AI 추천 그대로 | claude_code (draft) + Sun&Moon(생각) | — |
 
 ---
 
@@ -283,6 +285,25 @@ AI가 답 하나를 완성된 형태로 제시
 - **이유**: public으로 해도 재미있을 것 같다. — *Sun&Moon (발언 요약)*
 - **영향**: 문서, 결정 기록, 커밋 이력이 모두 공개된다.
 
+### DEC-023 이슈 관리 시스템은 GitHub Issues
+
+- **결정**: Jira 대신 GitHub Issues를 사용한다. 작업 진행 상태의 원본은 GitHub Issues, 결정과 설계의 원본은 저장소다.
+- **채택**: 사람 제안
+- **이유**:
+  - Jira가 하나의 관리 포인트가 되면 결국 담당자가 필요하다. 그리고 Jira 하나가 엄청 큰 프로젝트이다. 연결부터 설정 관리가 일이다. 현재 그렇게까지 할 시간적 여유가 없다. 인력도 없다. — *Sun&Moon(생각)*
+- **replaces**: DEC-001 (Jira 사용), DEC-014의 "작업 상태는 Jira" 부분
+- **영향**: 명세 본문은 특정 제품명을 쓰지 않으므로(00.common §8.4) 바뀌지 않는다. Claude Code 부록에 넣을 연결 방법은 Jira 대신 GitHub Issues(`gh` CLI) 기준으로 정리한다.
+
+### DEC-024 이슈 ID는 저장소 이름까지 적는다
+
+- **결정**: 기록의 `issues`에는 GitHub Issue를 `<owner>/<repo>#<번호>` 형식으로 적는다. 예: `schware/aidev-SOPS001#12`
+- **AI 추천**: 이 안
+- **대안**: `#12`처럼 번호만 적기. 짧지만 같은 저장소 안에서만 뜻이 통한다.
+- **채택**: AI 추천 그대로
+- **이유**: umbrella 저장소처럼 저장소가 여러 개면 번호만으로는 어느 저장소의 이슈인지 알 수 없다. 저장소 이름이 있으면 기록만 보고 찾아갈 수 있다. — *claude_code (draft)*
+  - 추천해준 방식에서 사용자까지 있어서 이후에 새로운 개발자가 추가 되면 명확하게 구분할수 있어서 좋다. 그리고 프로젝트 명과 순번은 기본으로 될 것 이다. — *Sun&Moon(생각)*
+- **반영**: `project-starter/files/project.yaml`의 `identifiers.issue_patterns`
+
 ---
 
 ## 합의된 규칙
@@ -362,7 +383,7 @@ AI가 답 하나를 완성된 형태로 제시
   - Monthly: PM/PL용 Graph 보고서, 미확인 draft 정리
   - Quarter: 우선순위와 opportunity 다시 보기
   - Half / Year: vision 다시 보기, 운영 결과를 00으로 환류
-- 위험 등급을 매기는 위치 (DEC-008의 질문). claude_code 추천: 작업은 Jira 이슈 필드에, 결정은 결정 기록의 `risk_level`에 둔다.
+- 위험 등급을 매기는 위치 (DEC-008의 질문). claude_code 추천: 작업은 GitHub Issue에(DEC-023), 결정은 결정 기록의 `risk_level`에 둔다.
 - CI 계획 (DEC-016): GitHub 연동과 결정 기록 포맷이 정해진 뒤에 세운다.
 - once와 always 권한 선택 방식 (DEC-009): Claude Code 부록(A1)에 넣을 후보다.
 - A 항목:
