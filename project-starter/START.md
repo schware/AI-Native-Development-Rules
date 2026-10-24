@@ -9,10 +9,10 @@
 
 ```text
 AI-Native-Development-Rules (규칙은 여기서만 고친다)
-   v0.3 ──→ v0.4 ──→ v0.5
+   v0.4 ──→ v0.5 ──→ v0.6
      ↑ submodule이 가리키는 버전
-프로젝트 A: v0.3을 가리키며 진행 → 확인 후 v0.4로 옮김
-프로젝트 B: v0.3을 계속 가리킴 (옮기지 않기로 결정)
+프로젝트 A: v0.4를 가리키며 진행 → 확인 후 v0.5로 옮김
+프로젝트 B: v0.4를 계속 가리킴 (옮기지 않기로 결정)
 ```
 
 ## files/ 구성
@@ -50,7 +50,7 @@ git submodule add https://github.com/schware/AI-Native-Development-Rules.git .fr
 ### 2. 따를 버전 고르기
 
 ```powershell
-git -C .framework checkout v0.3.0
+git -C .framework checkout v0.4.0
 ```
 
 ### 3. 템플릿 파일 복사
@@ -70,7 +70,7 @@ git add -A
 ```
 
 ```powershell
-git commit -m "Start project from AI Native Development Rules v0.3.0"
+git commit -m "Start project from AI Native Development Rules v0.4.0"
 ```
 
 ### 6. 첫 결정 기록
@@ -107,7 +107,7 @@ git submodule update --init
 
 ## 새 버전으로 옮길 때
 
-1. 두 버전의 차이를 확인한다. 예: `https://github.com/schware/AI-Native-Development-Rules/compare/v0.3.0...v0.4.0`
+1. 두 버전의 차이를 확인한다. 예: `https://github.com/schware/AI-Native-Development-Rules/compare/v0.4.0...v0.5.0`
 2. 옮길지 사람이 결정하고, 결정 기록으로 남긴다. 옮기지 않으면 여기서 끝난다.
 3. 새 버전을 가져온다.
 
@@ -116,7 +116,7 @@ git submodule update --init
    ```
 
    ```powershell
-   git -C .framework checkout v0.4.0
+   git -C .framework checkout v0.5.0
    ```
 
 4. `project.yaml`의 `git_ref`를 같은 버전으로 바꾼다.

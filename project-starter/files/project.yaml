@@ -7,12 +7,12 @@ default_language: ko
 common_spec:                         # .framework submodule이 가리키는 저장소와 버전 (00.common §11.5)
   repository: "https://github.com/schware/AI-Native-Development-Rules"
   path: "specification/00.common/README.md"
-  git_ref: "v0.3.0"                  # submodule이 가리키는 Tag와 같게 유지
+  git_ref: "v0.4.0"                  # submodule이 가리키는 Tag와 같게 유지
 
 area_specs:
   decision:
     path: "specification/07.decision/README.md"
-    git_ref: "v0.3.0"
+    git_ref: "v0.4.0"
 
 repository:
   base_branch: main
