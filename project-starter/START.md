@@ -9,10 +9,10 @@
 
 ```text
 AI-Native-Development-Rules (규칙은 여기서만 고친다)
-   v0.4 ──→ v0.5 ──→ v0.6
+   v0.5 ──→ v0.6 ──→ v0.7
      ↑ submodule이 가리키는 버전
-프로젝트 A: v0.4를 가리키며 진행 → 확인 후 v0.5로 옮김
-프로젝트 B: v0.4를 계속 가리킴 (옮기지 않기로 결정)
+프로젝트 A: v0.5를 가리키며 진행 → 확인 후 v0.6으로 옮김
+프로젝트 B: v0.5를 계속 가리킴 (옮기지 않기로 결정)
 ```
 
 ## files/ 구성
@@ -22,6 +22,8 @@ AI-Native-Development-Rules (규칙은 여기서만 고친다)
 | `project.yaml` | 프로젝트 ID, 따르는 명세와 버전, 기록 경로, 역할 | 00.common §6.4 |
 | `.gitattributes` | 줄바꿈을 LF로 통일 | 00.common §6.8 |
 | `records/07.decision/` | 공식 결정 기록을 두는 곳 | 00.common §6.8 |
+| `docs/` | 명세와 공식 기록이 아닌, 사람이 읽는 문서 (안내서, 설계 문서, 개발 완료 문서) | 00.common §6.8 |
+| `src/` | 소스 코드. 구성 요소별로 하위 폴더를 나눈다 (예: `src/frontend/`, `src/backend/`) | 00.common §6.8 |
 | `current-state.md` | 이 프로젝트에서 지금 유효한 규칙. 줄마다 근거 결정 ID를 붙인다 | 00.common §4, §11.5, 07.decision §8.7 |
 | `CLAUDE.md` | AI Agent가 작업 전에 읽을 것과 지킬 것 | 00.common §12.2 |
 | `.github/pull_request_template.md` | 반영 전에 사람이 확인할 체크리스트 | 00.common §12.1, §8.5 |
@@ -50,7 +52,7 @@ git submodule add https://github.com/schware/AI-Native-Development-Rules.git .fr
 ### 2. 따를 버전 고르기
 
 ```powershell
-git -C .framework checkout v0.4.0
+git -C .framework checkout v0.5.0
 ```
 
 ### 3. 템플릿 파일 복사
@@ -70,7 +72,7 @@ git add -A
 ```
 
 ```powershell
-git commit -m "Start project from AI Native Development Rules v0.4.0"
+git commit -m "Start project from AI Native Development Rules v0.5.0"
 ```
 
 ### 6. 첫 결정 기록
@@ -107,7 +109,7 @@ git submodule update --init
 
 ## 새 버전으로 옮길 때
 
-1. 두 버전의 차이를 확인한다. 예: `https://github.com/schware/AI-Native-Development-Rules/compare/v0.4.0...v0.5.0`
+1. 두 버전의 차이를 확인한다. 예: `https://github.com/schware/AI-Native-Development-Rules/compare/v0.5.0...v0.6.0`
 2. 옮길지 사람이 결정하고, 결정 기록으로 남긴다. 옮기지 않으면 여기서 끝난다.
 3. 새 버전을 가져온다.
 
@@ -116,7 +118,7 @@ git submodule update --init
    ```
 
    ```powershell
-   git -C .framework checkout v0.5.0
+   git -C .framework checkout v0.6.0
    ```
 
 4. `project.yaml`의 `git_ref`를 같은 버전으로 바꾼다.

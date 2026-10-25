@@ -20,7 +20,7 @@ AI가 내놓은 답이 정답처럼 보여 그대로 넘어간 적이 많았습�
 
 ## 현재 버전
 
-`v0.4.0` (초안). `0.x` 버전은 실험과 초안 단계입니다(00.common §11.4).
+`v0.5.0` (초안). `0.x` 버전은 실험과 초안 단계입니다(00.common §11.4).
 
 ## 시작하기
 
@@ -35,6 +35,7 @@ AI가 내놓은 답이 정답처럼 보여 그대로 넘어간 적이 많았습�
 | [`specification/07.decision/`](specification/07.decision/) | 결정 기록 규칙 |
 | `specification/01~06, 08` | 아직 비어 있습니다. 필요해지면 작성합니다 |
 | [`project-starter/`](project-starter/) | 새 프로젝트를 시작할 때 복사하는 파일과 예시 |
+| [`docs/`](docs/) | 실제 프로젝트에 적용하며 모은 경험과 다음 버전 후보 |
 | [`ai-native-development-framework-v03/`](ai-native-development-framework-v03/) | 명세 이전의 프레임워크 문서. 배경과 개념을 참고하는 용도이며 기준은 아닙니다 |
 | [`ai-native-development-framework-v03/DECISION-LOG.md`](ai-native-development-framework-v03/DECISION-LOG.md) | 명세 이전의 결정 이력. 새 형식으로 정리할 예정입니다 |
 | [`ai-native-development-framework-v03/FULL-CONTEXT.md`](ai-native-development-framework-v03/FULL-CONTEXT.md) | 대화가 발전해 온 과정 전체 |
