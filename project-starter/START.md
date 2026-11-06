@@ -52,7 +52,7 @@ git submodule add https://github.com/schware/AI-Native-Development-Rules.git .fr
 ### 2. 따를 버전 고르기
 
 ```powershell
-git -C .framework checkout v0.5.0
+git -C .framework checkout v0.5.1
 ```
 
 ### 3. 템플릿 파일 복사
@@ -72,7 +72,7 @@ git add -A
 ```
 
 ```powershell
-git commit -m "Start project from AI Native Development Rules v0.5.0"
+git commit -m "Start project from AI Native Development Rules v0.5.1"
 ```
 
 ### 6. 첫 결정 기록
@@ -109,7 +109,7 @@ git submodule update --init
 
 ## 새 버전으로 옮길 때
 
-1. 두 버전의 차이를 확인한다. 예: `https://github.com/schware/AI-Native-Development-Rules/compare/v0.5.0...v0.6.0`
+1. 두 버전의 차이를 확인한다. 예: `https://github.com/schware/AI-Native-Development-Rules/compare/v0.5.1...v0.6.0`
 2. 옮길지 사람이 결정하고, 결정 기록으로 남긴다. 옮기지 않으면 여기서 끝난다.
 3. 새 버전을 가져온다.
 
