@@ -36,11 +36,8 @@ AI가 내놓은 답이 정답처럼 보여 그대로 넘어간 적이 많았습�
 | `specification/01~06, 08` | 아직 비어 있습니다. 필요해지면 작성합니다 |
 | [`project-starter/`](project-starter/) | 새 프로젝트를 시작할 때 복사하는 파일과 예시 |
 | [`docs/`](docs/) | 실제 프로젝트에 적용하며 모은 경험과 다음 버전 후보 |
-| [`ai-native-development-framework-v03/`](ai-native-development-framework-v03/) | 명세 이전의 프레임워크 문서. 배경과 개념을 참고하는 용도이며 기준은 아닙니다 |
 | [`ai-native-development-framework-v03/DECISION-LOG.md`](ai-native-development-framework-v03/DECISION-LOG.md) | 명세 이전의 결정 이력. 새 형식으로 정리할 예정입니다 |
-| [`ai-native-development-framework-v03/FULL-CONTEXT.md`](ai-native-development-framework-v03/FULL-CONTEXT.md) | 대화가 발전해 온 과정 전체 |
-| [`ai-native-development-framework-markdown-sets/`](ai-native-development-framework-markdown-sets/) | 이전 버전 (Human/Agent 세트). 이력으로 보관 |
-| [`ai-native-development-framework-conversation-evolution.md`](ai-native-development-framework-conversation-evolution.md) | 초기 대화 발전 기록. 이력으로 보관 |
+| [`archive/`](archive/) | 이전 버전, 명세 이전의 프레임워크 문서, 초기 대화 기록. 이력으로만 보관하며 기준이 아닙니다. 작업할 때 읽지 않습니다 |
 
 ## 상태
 
