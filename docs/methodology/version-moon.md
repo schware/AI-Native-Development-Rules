@@ -6,7 +6,7 @@
 
 ## 한눈에
 - 처음에 Charter 하나로 Product Goal과 끝(MVP)을 정한다.
-- 그 뒤로는 Issue를 하나씩 만들고 Retrospective로 돌아보며 나아간다. 열린 Issue는 늘 하나다.
+- 그 뒤로는 Issue를 하나씩 만들고 Retrospective로 돌아보며 나아간다. 열린 Issue는 늘 하나다(Epic Issue는 세지 않는다).
 - Add-on은 처음부터 두지 않는다. DoR 점검과, 진행 중에 생긴 일로 켠다.
 
 ## 왜 이렇게 하는가
@@ -19,6 +19,88 @@
 ```text
 Charter → [ DoR → 진행 → DoD → Retrospective ] 반복 → 끝 (Done 또는 Archive)
 ```
+
+## 구조: Epic, Release, Issue
+
+Issue는 Epic을 대신하지 않는다. **Epic은 Release 하나이고, Release 안에 Issue가 여러 개 있다.** 기능을 만드는 Issue가 일반 Agile의 User Story에 해당한다.
+
+```text
+Product Goal (Charter, 한 문장)
+└─ Epic List (Charter, 결정된 방향)
+   ├─ Epic 1 = Release 1 (끝 = MVP)          → Epic Issue #10
+   │  ├─ User Story: Walking Skeleton        → Sub-issue #11
+   │  ├─ User Story                           → Sub-issue #12
+   │  ├─ Spike                                → Sub-issue #13
+   │  └─ User Story                           → Sub-issue #14  (닫히면 Epic 1 완료)
+   ├─ Epic 2 = Release 2                     → Epic Issue #20
+   └─ Epic 3 = Release 3
+```
+
+| 단위 | 크기 | 어디에 적나 | 누가 정하나 |
+|---|---|---|---|
+| **Product Goal** | 프로젝트 전체 | Charter | 사람 |
+| **Epic** (= Release) | 쓸 수 있는 상태 하나. Issue 여러 개 | Charter의 Epic List(이름과 최소 목표 한 줄), GitHub의 Epic Issue | 사람 (Learning에서 결정) |
+| **Issue** | Estimate 안에 끝나는 일 하나 | GitHub Issue (Epic Issue의 Sub-issue) | Release Planning에서 사람이 고른다. AI는 나누는 안을 낸다 |
+
+## Issue의 종류와 등록 방법
+
+### 종류
+| 종류 | label | 쓰는 때 | 형식 |
+|---|---|---|---|
+| **Epic Issue** | `epic` | Release 하나를 묶는다 | 이름, 최소 목표(Epic List의 한 줄), Release Goal, Acceptance Criteria |
+| **User Story** | — | 기능을 만든다 | 누가 / 무엇을 / 왜. 예: "개발자는 브라우저로 workspace에 들어가서, 노트북 설정 없이 개발을 시작한다" |
+| **Spike** | `spike` | 모르는 것을 확인한다 | 확인할 질문, 끝나는 기준, timebox |
+| **Bug** | `bug` | 만든 것이 Acceptance Criteria대로 동작하지 않는다 | 기대한 동작, 실제 동작, 다시 만드는 방법 |
+| **Decision Candidate** | `decision-needed` | 사람의 결정이 필요하다 | 결정 기록 초안(`proposed`) 링크 |
+
+막힌 Issue에는 종류와 상관없이 `blocked` label을 더한다.
+
+### 등록 순서
+1. Release Planning에서 **Epic Issue**를 하나 연다.
+2. 이번 Release에서 할 Issue를 Epic Issue의 **Sub-issues**로 단다. `gh`로 연결할 수 없으면 웹에서 연결하거나, Epic Issue 본문에 자식 Issue 번호를 체크리스트로 적는다.
+3. 열린 Issue를 셀 때 **Epic Issue는 세지 않는다.** 열린 Issue 하나는 User Story, Spike, Bug, Decision Candidate 중에서 센다.
+4. Sub-issues가 모두 닫히고 Release의 Retrospective를 마치면 Epic Issue를 닫는다.
+
+### 크기를 맞추는 규칙
+- Issue가 Estimate 안에 끝나지 않을 것 같으면 나눈다. 나눌 수 없으면 Spike로 먼저 확인한다.
+- Epic의 Issue가 Backlog 상한(5개)을 넘으면 Epic이 너무 크다는 뜻이다. Release를 나누고, 나눈 결과는 결정 기록으로 남겨 Epic List를 고친다.
+- Issue는 한 Epic에만 속한다. 다른 Epic의 일이 필요해지면, 지금 Release Goal에 꼭 필요한지 본다. 필요하지 않으면 그 Epic의 Release Planning 때 다룬다.
+
+## Release와 branch
+
+### Release
+- Epic이 끝나면 main에 **tag**를 붙이고 **GitHub Release**를 만든다. 예: Epic 1(MVP) 완료 → `v0.1.0`, Epic 2 완료 → `v0.2.0`.
+- release note에는 닫힌 Issue 목록과 Retrospective 링크를 둔다.
+- Release는 branch가 아니라 main 위의 tag다. tag는 "이 시점에 이 Epic이 끝났다"는 책갈피다.
+
+### branch (GitHub Flow)
+
+```text
+main ─●──●──●──●──●──────●──●──●──●──●──→
+      #11 #12 #13 #14 #15  #21 #22 #23 #24 #25
+                       ↑                    ↑
+                  tag v0.1.0           tag v0.2.0
+```
+
+- branch는 **Issue 하나에 하나**. main에서 따고, PR로 main에 돌아오고, merge 뒤 지운다. 다음 Issue는 다시 main에서 딴다.
+- **Epic branch와 Release branch는 만들지 않는다.** Epic branch에 쌓아 두다가 한 번에 합치면, 떨어져 있던 만큼 충돌이 커진다.
+- **Spike branch는 merge하지 않는다.** 결과는 결정 기록으로 남기고 지운다.
+- **merge된 main은 언제나 동작해야 한다.** User Story는 그 자체로 동작하고 test를 통과해야 merge한다. 아직 쓰면 안 되는 기능은 화면에 연결하지 않은 채로 둔다.
+
+### 이미 낸 버전을 급히 고칠 때 (hotfix)
+main에는 이미 다음 Epic이 반쯤 들어 있을 수 있다. 그래서 이때만 예외로 tag에서 branch를 딴다.
+
+```text
+main ─●──●──●──●──●──────●──●──●───────●──→
+                       ↑         \         ↑
+                    v0.1.0        \     main에도 같은 수정을 넣는다
+                       \           \
+                        └─ hotfix ─●── tag v0.1.1
+```
+
+1. tag `v0.1.0`에서 hotfix branch를 딴다.
+2. 고치고 tag `v0.1.1`을 붙인다.
+3. 같은 수정을 main에도 넣는다. 안 넣으면 다음 Release에서 같은 Bug가 다시 나온다.
 
 ## 1. Charter (`docs/plan-baseline.md`)
 프로젝트에 하나만 둔다. 모두 채워야 시작한다.
@@ -126,7 +208,14 @@ Charter는 고정하고, 나머지는 쌓아 간다. 지난 내용은 지우거�
 | **Release Planning** (릴리스 계획) | Epic List에서 다음 Release를 고르고, 이번에 할 Issue를 정하는 시기 | 정해진 주기 없이, 필요할 때 연다 |
 | **Release Goal** (릴리스 목표) | 이번 Release가 끝났을 때의 상태 | |
 | **Backlog** (백로그) | 이번 Release에서 꺼낼 Issue 목록. 최대 5개 | 일반 Agile의 Product Backlog처럼 쌓아 두지 않는다. 들어가는 곳이 아니라 나오기 위한 목록 |
-| **Issue** | 일 하나. 열린 Issue는 늘 하나 | 일반 Agile의 User Story에 해당 |
+| **Issue** | Estimate 안에 끝나는 일 하나. Release 안에 여러 개 있고, 열린 Issue는 늘 하나(Epic Issue 제외). 종류는 User Story, Spike, Bug, Decision Candidate | Epic을 대신하지 않는다 |
+| **Epic Issue** | Release 하나를 묶는 GitHub Issue. `epic` label. Sub-issues가 모두 닫히고 Retrospective를 마치면 닫는다 | WIP에 세지 않는다 |
+| **Sub-issues** (하위 Issue) | GitHub에서 Issue 아래에 자식 Issue를 다는 기능. Epic Issue에 진행률이 보인다 | Milestone은 역할이 겹쳐 쓰지 않는다 |
+| **User Story** | 기능을 만드는 Issue. 누가 / 무엇을 / 왜로 쓴다 | 일반 Agile과 같다 |
+| **Bug** | Acceptance Criteria대로 동작하지 않는 것을 고치는 Issue | |
+| **tag** | main의 한 시점에 붙이는 이름. Epic이 끝난 자리의 책갈피 | |
+| **GitHub Release** | tag에 release note를 붙여 "이 버전을 냈다"를 남기는 기능 | Release(릴리스)는 일의 단위이고, GitHub Release는 그 끝을 기록하는 기능이다 |
+| **hotfix** | 이미 낸 버전을 급히 고치는 것. tag에서 branch를 따고, 같은 수정을 main에도 넣는다 | 유일하게 main이 아닌 곳에서 branch를 딴다 |
 | **Walking Skeleton** (첫 Issue) | 처음부터 끝까지 한 번 이어지는 가장 작은 기능 | |
 | **DoR** (Definition of Ready, 시작 점검) | Issue를 시작하기 전에 갖출 것 | |
 | **Acceptance Criteria** (끝났다는 기준) | Issue나 Release가 끝났다고 판단하는 기준 | |
